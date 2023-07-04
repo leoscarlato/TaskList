@@ -1,33 +1,52 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [tasks, setTasks] = useState([])
+  const [newTask, setNewTask] = useState('')
+
+  const handleInputChange = (event) => {
+    setNewTask(event.target.value)
+  }
+
+  const handleAddTask = () => {
+    if (newTask === '') {
+      alert('Digite uma tarefa')
+      return
+    }
+
+    setTasks([...tasks, newTask])
+    setNewTask('')
+  }
+
+  const handleDeleteTask = (index) => {
+    const updatedTasks = [...tasks]
+    updatedTasks.splice(index, 1)
+    setTasks(updatedTasks)
+  }
 
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+      <div className="title">
+        <h1>Lista de tarefas</h1>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
+
+      <div className="task-input">
+        <input type="text" placeholder="Digite uma tarefa" value={newTask} onChange={handleInputChange} />
+        <button onClick={handleAddTask}>Adicionar</button>
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+
+      <div className="task-list">
+        <ul>
+          {tasks.map((task, index) => (
+            <li key={index}>
+              {task}
+              <button onClick={() => handleDeleteTask(index)} className='delete-button'><DeleteForeverIcon /></button>
+            </li>
+          ))}
+        </ul>
+      </div>
     </>
   )
 }
