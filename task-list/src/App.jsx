@@ -1,6 +1,8 @@
 import { useState } from 'react'
 import './App.css'
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
+import DoneIcon from '@mui/icons-material/Done';
+import Alert from '@mui/material/Alert';
 
 function App() {
   const [tasks, setTasks] = useState([])
@@ -26,6 +28,12 @@ function App() {
     setTasks(updatedTasks)
   }
 
+  const handleDoneTask = (index) => {
+    const updatedTasks = [...tasks]
+    updatedTasks.splice(index, 1)
+    setTasks(updatedTasks)
+  }
+
   return (
     <>
       <div className="title">
@@ -42,7 +50,10 @@ function App() {
           {tasks.map((task, index) => (
             <li key={index}>
               {task}
-              <button onClick={() => handleDeleteTask(index)} className='delete-button'><DeleteForeverIcon /></button>
+              <div className="buttons">
+                <button onClick={() => handleDoneTask(index)} className='done-button'><DoneIcon /></button>
+                <button onClick={() => handleDeleteTask(index)} className='delete-button'><DeleteForeverIcon /></button>
+              </div>
             </li>
           ))}
         </ul>

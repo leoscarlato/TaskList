@@ -72,13 +72,29 @@
   background-color: rgb(255, 0, 0);
   color: white;
   border: none;
-  border-radius: 50%;
+  border-radius: 30%;
+  padding: 0.5em;
+  outline: none;
+  cursor: pointer;
+  margin-left: 0.8em;
+}
+
+.delete-button:hover {
+  background-color: rgb(255, 0, 0, 0.6);
+  transition: 0.3s;
+}
+
+.done-button {
+  background-color: rgb(0, 138, 0);
+  color: white;
+  border: none;
+  border-radius: 30%;
   padding: 0.5em;
   outline: none;
   cursor: pointer;
 }
 
-.delete-button:hover {
-  background-color: rgb(255, 0, 0, 0.6);
+.done-button:hover {
+  background-color: rgb(0, 138, 0, 0.6);
   transition: 0.3s;
 }
